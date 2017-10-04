@@ -9,7 +9,7 @@ const corsMiddleware = require('restify-cors-middleware')
 
 const cors = corsMiddleware({
  preflightMaxAge: 5, //Optional 
- origins: ['http://api.myapp.com', 'http://localhost:4200'],
+ origins: ['https://sleepy-fortress-20470.herokuapp.com', 'http://localhost:4200'],
  allowHeaders: ['API-Token'],
  exposeHeaders: ['API-Token-Expiry']
 })
