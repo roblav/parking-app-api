@@ -6,7 +6,7 @@ const errors = require('restify-errors');
 /**
  * Model Schema
  */
-const CarOwner = require('../models/carOwner');
+const CarOwner = require('../models/CarOwner');
 
 module.exports = function(server) {
 

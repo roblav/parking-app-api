@@ -4,11 +4,6 @@ const timestamps = require('mongoose-timestamp');
 
 const CarOwnerSchema = new mongoose.Schema(
 	{
-		id: {
-			type: Number,
-			required: true,
-			trim: true,
-		},
 		name: {
 			type: String,
 			required: true,
