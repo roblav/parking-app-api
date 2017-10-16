@@ -10,20 +10,32 @@ const CarOwner = require('../models/CarOwner');
 
 module.exports = function(server) {
 
-		// API: GET /car-owners
-		server.get('/car-owners', (req, res, next) => {
-			CarOwner.apiQuery(req.params, function(err, docs) {
-				if (err) {
-					console.error(err);
-					return next(
-						new errors.InvalidContentError(err.errors.name.message)
-					);
-				}
+	// API: GET /car-owners
+	server.get('/car-owners', (req, res, next) => {
+		CarOwner.apiQuery(req.params, function(err, docs) {
+			if (err) {
+				console.error(err);
+				return next(
+					new errors.InvalidContentError(err.errors.name.message)
+				);
+			}
 	
-				res.send(docs);
-				next();
-			});
+			res.send(docs);
+			next();
 		});
+	});
+
+				// API: POST /car-owners
+	server.post('/car-owners/skype-display-name', (req, res, next) => {
+
+		let data = req.body || {};
+
+		console.log(data)
+
+		//----Make a call to the Skype Bot
+		// Make a DB query using SkypeDisplayName and get the conversation id.
+
+	});
 
 	// API: POST /car-owners
 	server.post('/car-owners', (req, res, next) => {
