@@ -9,7 +9,7 @@ const corsMiddleware = require('restify-cors-middleware')
 
 const cors = corsMiddleware({
  preflightMaxAge: 5, //Optional
- origins: ['https://parking-app-admin.herokuapp.com', 'http://localhost:4200', 'http://myparking-app-admin.azurewebsites.net', 'http://localhost:8100/'],
+ origins: ['https://parking-app-admin.herokuapp.com', 'http://localhost:4200', 'http://myparking-app-admin.azurewebsites.net', 'http://localhost:8100'],
  allowHeaders: ['API-Token'],
  exposeHeaders: ['API-Token-Expiry']
 })
