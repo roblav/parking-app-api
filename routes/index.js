@@ -42,7 +42,6 @@ module.exports = function(server) {
 			if (err) {
 				console.error(err);
 				return next(new errors.InternalError(err.message));
-				next();
 			}
 
 			res.send(201);
