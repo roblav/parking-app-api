@@ -3,6 +3,7 @@
  */
 const errors = require('restify-errors');
 const mongoose = require('mongoose');
+const request = require('request');
 
 /**
  * Model Schema
@@ -36,38 +37,30 @@ module.exports = function(server) {
 
 		console.log(data.name);
 
-		var rob = {
-			"id" : "1507735598505",
-			"channelId" : "skype",
-			"user" : {
-				"id" : "29:1eCnwgclFtzqtK3Th9tAQJ8oonQ5azmUOfciwpn8OLlQ",
-				"name" : "Robert Lavender"
-			},
-			"conversation" : {
-				"id" : "29:1eCnwgclFtzqtK3Th9tAQJ8oonQ5azmUOfciwpn8OLlQ"
-			},
-			"bot" : {
-				"id" : "28:0f2b0f95-6de2-4641-9add-83786bb50f0b",
-				"name" : "robsparkingapp"
-			},
-			"serviceUrl" : "https://smba.trafficmanager.net/apis/"
-		};
-
-		let skypeUser = new SkypeUser(rob);
-		skypeUser.save(function(err) {
-			if (err) {
-				console.error(err);
-				return next(new errors.InternalError(err.message));
+		// get all the users
+		SkypeUser.find({'user.name': data.name}, function(err, user) {
+  		if (err) throw err;
+  		// get converstaion.id / user.id
+			var skypeId = user[0].user.id;
+			var skypeDisplayName = user[0].user.name;
+  		console.log(skypeId, skypeDisplayName);
+			//POST to Skype Alert
+			var postData = {
+  			skypeId: skypeId,
+				skypeDisplayName: skypeDisplayName
 			}
 
-			next();
-		});
-
-		// get all the users
-		SkypeUser.find({}, function(err, users) {
-  		if (err) throw err;
-  		// object of all the users
-  		console.log(users);
+			request.post({
+				url: 'http://robsparkingapp.azurewebsites.net/skype-alert',
+				//url: 'http://localhost:3978/skype-alert',
+				body: postData,
+  			json: true,
+				function(err, res, body){
+  				if (err) { return console.log(err); }
+  				console.log(body);
+				}
+			});
+			
 		});
 
 		//console.log(skypeUser);

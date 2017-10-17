@@ -1,0 +1,18 @@
+[
+  {
+			"id" : "1507735598505",
+			"channelId" : "skype",
+			"user" : {
+				"id" : "29:1eCnwgclFtzqtK3Th9tAQJ8oonQ5azmUOfciwpn8OLlQ",
+				"name" : "Robert Lavender"
+			},
+			"conversation" : {
+				"id" : "29:1eCnwgclFtzqtK3Th9tAQJ8oonQ5azmUOfciwpn8OLlQ"
+			},
+			"bot" : {
+				"id" : "28:0f2b0f95-6de2-4641-9add-83786bb50f0b",
+				"name" : "robsparkingapp"
+			},
+			"serviceUrl" : "https://smba.trafficmanager.net/apis/"
+		}
+]
