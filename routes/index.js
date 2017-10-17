@@ -51,7 +51,7 @@ module.exports = function(server) {
 			}
 
 			request.post({
-				url: 'http://robsparkingapp.azurewebsites.net/skype-alert',
+				url: 'https://myparking-bot.azurewebsites.net/skype-alert',
 				//url: 'http://localhost:3978/skype-alert',
 				body: postData,
   			json: true,
