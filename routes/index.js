@@ -2,14 +2,18 @@
  * Module Dependencies
  */
 const errors = require('restify-errors');
+const mongoose = require('mongoose');
 
 /**
  * Model Schema
  */
 const CarOwner = require('../models/CarOwner');
+const SkypeUser = require('../models/SkypeUser');
 
 module.exports = function(server) {
 
+	const db = mongoose.connection;
+	//console.log(db)
 	// API: GET /car-owners
 	server.get('/car-owners', (req, res, next) => {
 		CarOwner.apiQuery(req.params, function(err, docs) {
@@ -28,9 +32,48 @@ module.exports = function(server) {
 				// API: POST /car-owners
 	server.post('/car-owners/skype-display-name', (req, res, next) => {
 
-		let data = req.body || {};
+		let data = JSON.parse(req.body) || {};
 
-		console.log(data)
+		console.log(data.name);
+
+		var rob = {
+			"id" : "1507735598505",
+			"channelId" : "skype",
+			"user" : {
+				"id" : "29:1eCnwgclFtzqtK3Th9tAQJ8oonQ5azmUOfciwpn8OLlQ",
+				"name" : "Robert Lavender"
+			},
+			"conversation" : {
+				"id" : "29:1eCnwgclFtzqtK3Th9tAQJ8oonQ5azmUOfciwpn8OLlQ"
+			},
+			"bot" : {
+				"id" : "28:0f2b0f95-6de2-4641-9add-83786bb50f0b",
+				"name" : "robsparkingapp"
+			},
+			"serviceUrl" : "https://smba.trafficmanager.net/apis/"
+		};
+
+		let skypeUser = new SkypeUser(rob);
+		skypeUser.save(function(err) {
+			if (err) {
+				console.error(err);
+				return next(new errors.InternalError(err.message));
+			}
+
+			next();
+		});
+
+		// get all the users
+		SkypeUser.find({}, function(err, users) {
+  		if (err) throw err;
+  		// object of all the users
+  		console.log(users);
+		});
+
+		//console.log(skypeUser);
+
+		res.send(201);
+		next();
 
 		//----Make a call to the Skype Bot
 		// Make a DB query using SkypeDisplayName and get the conversation id.
