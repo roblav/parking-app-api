@@ -33,6 +33,12 @@ module.exports = function(server) {
 				// API: POST /car-owners
 	server.post('/car-owners/skype-display-name', (req, res, next) => {
 
+		if (!req.is('application/json')) {
+			return next(
+				new errors.InvalidContentError("Expects 'application/json'")
+			);
+		}
+
 		let data = JSON.parse(req.body) || {};
 
 		console.log(data.name);
@@ -60,13 +66,13 @@ module.exports = function(server) {
   				console.log(body);
 				}
 			});
+
+			res.send(201);
+			next();
 			
 		});
 
 		//console.log(skypeUser);
-
-		res.send(201);
-		next();
 
 		//----Make a call to the Skype Bot
 		// Make a DB query using SkypeDisplayName and get the conversation id.
