@@ -39,13 +39,14 @@ module.exports = function(server) {
 			);
 		}
 
-		let data = JSON.parse(req.body) || {};
+		let data = req.body || {};
 
 		console.log(data.name);
 
 		// get all the users
-		SkypeUser.find({'user.name': data.name}, function(err, user) {
+		SkypeUser.find({"user.name": data.name}, function(err, user) {
   		if (err) throw err;
+			console.log(user)
   		// get converstaion.id / user.id
 			var skypeId = user[0].user.id;
 			var skypeDisplayName = user[0].user.name;

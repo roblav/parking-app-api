@@ -20,7 +20,7 @@ const SkypeUserSchema = new mongoose.Schema(
 		serviceUrl: { type: String, required: true, trim: true }
 	},
 	{ minimize: false },
-	{ collection: 'skypeUsers' }
+	{ collection: 'skypeusers' }
 );
 
 SkypeUserSchema.plugin(timestamps);
